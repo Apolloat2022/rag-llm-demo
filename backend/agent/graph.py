@@ -15,7 +15,7 @@ from __future__ import annotations
 import os
 from typing import Annotated, TypedDict
 
-from langchain_anthropic import ChatAnthropic
+from langchain_groq import ChatGroq
 from langchain_core.messages import BaseMessage, SystemMessage
 from langgraph.graph import END, StateGraph
 from langgraph.graph.message import add_messages
@@ -34,9 +34,9 @@ class AgentState(TypedDict):
 # ── LLM ──────────────────────────────────────────────────────────────────────
 
 def _build_llm():
-    return ChatAnthropic(
-        model=os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6"),
-        anthropic_api_key=os.getenv("ANTHROPIC_API_KEY", ""),
+    return ChatGroq(
+        model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+        groq_api_key=os.getenv("GROQ_API_KEY", ""),
         temperature=0,
     ).bind_tools(TOOLS)
 

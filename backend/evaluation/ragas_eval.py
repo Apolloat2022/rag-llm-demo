@@ -25,7 +25,7 @@ from ragas.metrics import (
     context_recall,
     answer_correctness,
 )
-from langchain_anthropic import ChatAnthropic
+from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from retrieval.retriever import retrieve
@@ -94,9 +94,9 @@ def run_ragas_evaluation() -> dict:
     """
     dataset = build_eval_dataset()
 
-    llm = ChatAnthropic(
-        model=os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6"),
-        anthropic_api_key=os.getenv("ANTHROPIC_API_KEY", ""),
+    llm = ChatGroq(
+        model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+        groq_api_key=os.getenv("GROQ_API_KEY", ""),
     )
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
