@@ -1,3 +1,6 @@
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())  # walks up from backend/ until it finds .env
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
