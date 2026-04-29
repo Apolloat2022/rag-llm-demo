@@ -1,21 +1,21 @@
-21:07:23.461 Running build in Washington, D.C., USA (East) – iad1
-21:07:23.462 Build machine configuration: 2 cores, 8 GB
-21:07:23.474 Cloning github.com/Apolloat2022/rag-llm-demo (Branch: main, Commit: 4b837eb)
-21:07:23.475 Skipping build cache, deployment was triggered without cache.
-21:07:23.780 Cloning completed: 305.000ms
-21:07:23.845 Found .vercelignore (repository root)
-21:07:23.850 Removed 24 ignored files defined in .vercelignore
-21:07:23.850   /backend/agent/__init__.py
-21:07:23.850   /backend/agent/graph.py
-21:07:23.850   /backend/agent/prompts.py
-21:07:23.850   /backend/agent/tools.py
-21:07:23.850   /backend/api/__init__.py
-21:07:23.851   /backend/api/main.py
-21:07:23.851   /backend/api/models.py
-21:07:23.851   /backend/api/routes/__init__.py
-21:07:23.851   /backend/api/routes/chat.py
-21:07:23.851   /backend/api/routes/health.py
-21:07:24.161 Running "vercel build"
-21:07:25.178 Vercel CLI 51.6.1
-21:07:25.406 Error: No fastapi entrypoint found. Add an 'app' script in pyproject.toml or define an entrypoint in one of: app.py, index.py, server.py, main.py, wsgi.py, asgi.py, src/app.py, src/index.py, src/server.py, src/main.py, src/wsgi.py, src/asgi.py, app/app.py, app/index.py, app/server.py, app/main.py, app/wsgi.py, app/asgi.py, api/app.py, api/index.py, api/server.py, api/main.py, api/wsgi.py, api/asgi.py.
-21:07:25.406 Learn More: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+21:29:44.528 Running build in Washington, D.C., USA (East) – iad1
+21:29:44.529 Build machine configuration: 2 cores, 8 GB
+21:29:44.657 Cloning github.com/Apolloat2022/rag-llm-demo (Branch: main, Commit: d4628f9)
+21:29:44.658 Previous build caches not available.
+21:29:44.864 Cloning completed: 207.000ms
+21:29:44.921 Found .vercelignore (repository root)
+21:29:44.931 Removed 24 ignored files defined in .vercelignore
+21:29:44.931   /backend/agent/__init__.py
+21:29:44.931   /backend/agent/graph.py
+21:29:44.931   /backend/agent/prompts.py
+21:29:44.931   /backend/agent/tools.py
+21:29:44.931   /backend/api/__init__.py
+21:29:44.931   /backend/api/main.py
+21:29:44.931   /backend/api/models.py
+21:29:44.931   /backend/api/routes/__init__.py
+21:29:44.931   /backend/api/routes/chat.py
+21:29:44.932   /backend/api/routes/health.py
+21:29:45.205 Running "vercel build"
+21:29:46.122 Vercel CLI 51.6.1
+21:29:46.333 Error: No fastapi entrypoint found. Add an 'app' script in pyproject.toml or define an entrypoint in one of: app.py, index.py, server.py, main.py, wsgi.py, asgi.py, src/app.py, src/index.py, src/server.py, src/main.py, src/wsgi.py, src/asgi.py, app/app.py, app/index.py, app/server.py, app/main.py, app/wsgi.py, app/asgi.py, api/app.py, api/index.py, api/server.py, api/main.py, api/wsgi.py, api/asgi.py.
+21:29:46.333 Learn More: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application

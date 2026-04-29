@@ -1,5 +1,5 @@
 backend/
 data/
 *.py
-requirements.txt
+dependencies.txt
 docker-compose.yml
