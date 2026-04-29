@@ -1,0 +1,25 @@
+Prompt: "Act as a Senior AI Solutions Architect. I want to build a hands-on portfolio project called 'InsurAgent AI'.
+
+The Goal: Build a RAG-powered agentic system that allows an insurance agent to upload complex carrier policy PDFs and 'chat' with them to find coverage gaps, generate quotes based on logic extracted from the documents, and automate claim eligibility checks.
+
+Technical Requirements to include:
+
+Ingestion Layer: Use Python and PyMuPDF to parse complex insurance tables and text from PDFs.
+
+Vector Strategy: Use LangChain or LlamaIndex with ChromaDB or Pinecone. Implement a 'Parent Document Retrieval' strategy to ensure the LLM has enough context for specific insurance clauses.
+
+The 'Agent' Layer: Use LangGraph or CrewAI to create an agent that can decide between 'Searching the Policy' (RAG) and 'Calculating a Quote' (a Python tool for math) to avoid LLM calculation errors.
+
+Frontend: A React dashboard where an agent can see the 'Source Citations' (which page/paragraph the AI found the info).
+
+Deployment: Design it to be AWS-ready using Docker.
+
+Please provide:
+
+A high-level System Architecture diagram description.
+
+The Project Folder Structure.
+
+A Python snippet for the RAG retrieval chain with a 'Re-ranker' step to ensure accuracy.
+
+A guide on how to evaluate the system using RAGAS metrics."
