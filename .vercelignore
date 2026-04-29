@@ -1,0 +1,5 @@
+backend/
+data/
+*.py
+requirements.txt
+docker-compose.yml
