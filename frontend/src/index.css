@@ -6,31 +6,42 @@
   *, *::before, *::after { box-sizing: border-box; }
   html, body, #root { height: 100%; margin: 0; padding: 0; }
   body {
-    background-color: #020408;
-    color: #e2e8f0;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Light mode (default) */
+  :root {
+    --grid-color: rgba(0, 0, 0, 0.045);
+    --glass-border: linear-gradient(160deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.02) 60%, transparent 100%);
+    --glass-inner: rgba(255, 255, 255, 0.65);
+    --header-border: rgba(0, 0, 0, 0.07);
+  }
+
+  /* Dark mode */
+  .dark {
+    --grid-color: rgba(255, 255, 255, 0.03);
+    --glass-border: linear-gradient(160deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);
+    --glass-inner: rgba(255, 255, 255, 0.04);
+    --header-border: rgba(255, 255, 255, 0.06);
   }
 }
 
 @layer utilities {
-  /* HUD 20px grid pattern */
   .hud-grid {
     background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
-  /* Gradient border via padding trick */
   .glass-border {
-    background: linear-gradient(160deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);
+    background: var(--glass-border);
     padding: 1px;
   }
 
-  /* Inner glass fill */
   .glass-inner {
-    background: rgba(255,255,255,0.04);
+    background: var(--glass-inner);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
