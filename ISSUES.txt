@@ -1,21 +1,31 @@
-21:29:44.528 Running build in Washington, D.C., USA (East) – iad1
-21:29:44.529 Build machine configuration: 2 cores, 8 GB
-21:29:44.657 Cloning github.com/Apolloat2022/rag-llm-demo (Branch: main, Commit: d4628f9)
-21:29:44.658 Previous build caches not available.
-21:29:44.864 Cloning completed: 207.000ms
-21:29:44.921 Found .vercelignore (repository root)
-21:29:44.931 Removed 24 ignored files defined in .vercelignore
-21:29:44.931   /backend/agent/__init__.py
-21:29:44.931   /backend/agent/graph.py
-21:29:44.931   /backend/agent/prompts.py
-21:29:44.931   /backend/agent/tools.py
-21:29:44.931   /backend/api/__init__.py
-21:29:44.931   /backend/api/main.py
-21:29:44.931   /backend/api/models.py
-21:29:44.931   /backend/api/routes/__init__.py
-21:29:44.931   /backend/api/routes/chat.py
-21:29:44.932   /backend/api/routes/health.py
-21:29:45.205 Running "vercel build"
-21:29:46.122 Vercel CLI 51.6.1
-21:29:46.333 Error: No fastapi entrypoint found. Add an 'app' script in pyproject.toml or define an entrypoint in one of: app.py, index.py, server.py, main.py, wsgi.py, asgi.py, src/app.py, src/index.py, src/server.py, src/main.py, src/wsgi.py, src/asgi.py, app/app.py, app/index.py, app/server.py, app/main.py, app/wsgi.py, app/asgi.py, api/app.py, api/index.py, api/server.py, api/main.py, api/wsgi.py, api/asgi.py.
-21:29:46.333 Learn More: https://vercel.com/docs/frameworks/backend/fastapi#exporting-the-fastapi-application
+21:51:00.758 Running build in Washington, D.C., USA (East) – iad1
+21:51:00.759 Build machine configuration: 2 cores, 8 GB
+21:51:00.775 Cloning github.com/Apolloat2022/rag-llm-demo (Branch: main, Commit: bddc050)
+21:51:00.777 Skipping build cache, deployment was triggered without cache.
+21:51:01.088 Cloning completed: 312.000ms
+21:51:01.221 Found .vercelignore (repository root)
+21:51:01.228 Removed 24 ignored files defined in .vercelignore
+21:51:01.228   /backend/agent/__init__.py
+21:51:01.228   /backend/agent/graph.py
+21:51:01.228   /backend/agent/prompts.py
+21:51:01.228   /backend/agent/tools.py
+21:51:01.228   /backend/api/__init__.py
+21:51:01.229   /backend/api/main.py
+21:51:01.229   /backend/api/models.py
+21:51:01.229   /backend/api/routes/__init__.py
+21:51:01.229   /backend/api/routes/chat.py
+21:51:01.229   /backend/api/routes/health.py
+21:51:01.574 Running "vercel build"
+21:51:02.619 Vercel CLI 51.6.1
+21:51:03.421 Installing dependencies...
+21:51:06.873 
+21:51:06.874 added 69 packages in 3s
+21:51:06.874 
+21:51:06.875 8 packages are looking for funding
+21:51:06.875   run `npm fund` for details
+21:51:07.072 
+21:51:07.072 > insuragent-ai-frontend@1.0.0 build
+21:51:07.073 > tsc && vite build
+21:51:07.073 
+21:51:09.205 src/api.ts(3,26): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+21:51:09.253 Error: Command "npm run build" exited with 2

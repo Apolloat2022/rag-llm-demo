@@ -1,0 +1,29 @@
+Role: Act as a Senior Creative Technologist specializing in high-end, futuristic UI/UX (Aesthetic: Vercel, Linear, and Blade Runner 2049).
+
+Task: Refactor the frontend of the InsurAgent AI dashboard to implement a "Liquid Glass HUD" design system.
+
+Core Styling Constraints:
+
+The Glass System: Every container (Sidebar, Chat Window, Input) must use backdrop-blur-[12px] and a semi-transparent background bg-white/5.
+
+Refractive Borders: Instead of solid borders, use 1px linear-gradient borders (border-t-white/20 to border-b-transparent).
+
+The HUD Grid: Add a faint, fixed SVG square grid pattern (20px) at opacity-5 to the main chat background to give it an "engineered" terminal feel.
+
+Typography: >    - Headings: Use a high-contrast Sans-Serif (Inter/Geist) with tracking-tighter.
+
+Metadata/Tools: Use a Monospaced font (JetBrains Mono) for all "Agent Tools" and status labels.
+
+Micro-Interactions: >    - Add a subtle pulse animation to the "Agent Tools" status indicators.
+
+Implement a "glow" effect on the chat input when focused (shadow-[0_0_20px_rgba(59,130,246,0.3)]).
+
+Specific Component Requests:
+
+Sidebar: Make it feel like a floating pane. Remove the solid dark background; use the blur and a thin right-border gradient.
+
+Upload Button: Style it as a "Primary Action" HUD element—sharp corners, 1px glow border, and an uppercase monospaced label.
+
+Chat Area: Ensure the empty state looks intentional—perhaps a centered, low-opacity logo with a "System Ready" scanning line animation.
+
+Technical Execution: Use Tailwind CSS for all styling. If animations require it, use Framer Motion. Keep the code modular and clean.
