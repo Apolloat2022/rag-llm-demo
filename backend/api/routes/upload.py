@@ -9,7 +9,14 @@ from vectorstore.chroma_store import InsuranceVectorStore
 from api.models import UploadResponse
 
 router = APIRouter(prefix="/api", tags=["ingestion"])
-_store = InsuranceVectorStore()
+_store: InsuranceVectorStore | None = None
+
+
+def _get_store() -> InsuranceVectorStore:
+    global _store
+    if _store is None:
+        _store = InsuranceVectorStore()
+    return _store
 
 
 @router.post("/upload", response_model=UploadResponse)
@@ -25,7 +32,7 @@ async def upload_policy(file: UploadFile = File(...)):
     try:
         blocks = parse_pdf(tmp_path)
         pairs = blocks_to_chunk_pairs(blocks)
-        indexed = _store.index_chunks(pairs)
+        indexed = _get_store().index_chunks(pairs)
     finally:
         tmp_path.unlink(missing_ok=True)
 
