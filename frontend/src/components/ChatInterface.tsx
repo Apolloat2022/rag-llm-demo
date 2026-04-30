@@ -69,11 +69,11 @@ export function ChatInterface({ dark }: Props) {
                 </p>
 
                 {msg.role === "user" ? (
-                  <div className="max-w-[70%] px-4 py-2.5 rounded-xl rounded-br-sm bg-blue-500/15 border border-blue-500/25 text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
+                  <div className="max-w-[85%] md:max-w-[70%] px-4 py-2.5 rounded-xl rounded-br-sm bg-blue-500/15 border border-blue-500/25 text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
                     {msg.content}
                   </div>
                 ) : (
-                  <div className="max-w-[70%] glass-border rounded-xl rounded-bl-sm">
+                  <div className="max-w-[85%] md:max-w-[70%] glass-border rounded-xl rounded-bl-sm">
                     <div className="glass-inner rounded-xl rounded-bl-sm px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                       {msg.content}
                       {msg.toolCallsMade && msg.toolCallsMade.length > 0 && (

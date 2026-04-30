@@ -8,6 +8,7 @@ import type { UploadResponse } from "./types";
 export default function App() {
   const [uploadedDocs, setUploadedDocs] = useState<UploadResponse[]>([]);
   const [dark, setDark] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className={dark ? "dark" : ""}>
@@ -24,8 +25,19 @@ export default function App() {
         <div className="relative z-10 flex flex-col h-full">
 
           {/* Header */}
-          <header className="flex items-center justify-between px-6 py-3" style={{ borderBottom: '1px solid var(--header-border)' }}>
+          <header className="flex items-center justify-between px-4 md:px-6 py-3" style={{ borderBottom: '1px solid var(--header-border)' }}>
             <div className="flex items-center gap-3">
+              {/* Hamburger — mobile only */}
+              <button
+                className="md:hidden flex flex-col justify-center gap-[5px] p-1"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open sidebar"
+              >
+                <span className="block w-5 h-[1.5px] bg-slate-600 dark:bg-slate-300 rounded-full" />
+                <span className="block w-5 h-[1.5px] bg-slate-600 dark:bg-slate-300 rounded-full" />
+                <span className="block w-5 h-[1.5px] bg-slate-600 dark:bg-slate-300 rounded-full" />
+              </button>
+
               <div className="w-7 h-7 glass-border rounded-lg">
                 <div className="glass-inner rounded-lg w-full h-full flex items-center justify-center">
                   <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
@@ -39,8 +51,8 @@ export default function App() {
               </h1>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="hidden md:flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse-dot" />
                 <span className="font-mono text-[10px] tracking-wide text-slate-400 dark:text-slate-500 uppercase">System Online</span>
               </div>
@@ -54,28 +66,53 @@ export default function App() {
               >
                 <div className="glass-inner rounded-full px-3 py-1.5 flex items-center gap-1.5">
                   <span className="text-[13px]">{dark ? "☀️" : "🌙"}</span>
-                  <span className="font-mono text-[10px] tracking-wide text-slate-500 dark:text-slate-400 uppercase">
+                  <span className="hidden md:inline font-mono text-[10px] tracking-wide text-slate-500 dark:text-slate-400 uppercase">
                     {dark ? "Light" : "Dark"}
                   </span>
                 </div>
               </motion.button>
 
-              <span className="font-mono text-[10px] text-slate-400 dark:text-slate-600 tracking-wide">v1.0.0</span>
+              <span className="hidden md:inline font-mono text-[10px] text-slate-400 dark:text-slate-600 tracking-wide">v1.0.0</span>
             </div>
           </header>
 
           {/* Main layout */}
           <main className="flex flex-1 overflow-hidden gap-3 p-3">
 
-            {/* Sidebar */}
+            {/* Mobile backdrop */}
+            {sidebarOpen && (
+              <div
+                className="fixed inset-0 z-40 bg-black/40 md:hidden"
+                onClick={() => setSidebarOpen(false)}
+              />
+            )}
+
+            {/* Sidebar — fixed drawer on mobile, static panel on desktop */}
             <motion.aside
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="w-64 flex-shrink-0"
+              className={[
+                "fixed inset-y-0 left-0 z-50 w-72",
+                "md:static md:z-auto md:w-64 md:flex-shrink-0",
+                "transition-transform duration-300 ease-in-out",
+                sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
+              ].join(" ")}
             >
               <GlassPanel className="h-full">
                 <div className="flex flex-col gap-5 p-4 h-full overflow-y-auto">
+
+                  {/* Mobile close button */}
+                  <div className="flex items-center justify-between md:hidden">
+                    <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-slate-400 dark:text-slate-500">◈ Menu</p>
+                    <button
+                      onClick={() => setSidebarOpen(false)}
+                      className="font-mono text-[14px] text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 leading-none"
+                      aria-label="Close sidebar"
+                    >
+                      ✕
+                    </button>
+                  </div>
 
                   <div>
                     <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-slate-400 dark:text-slate-500 mb-3">
