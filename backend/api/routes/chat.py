@@ -2,9 +2,6 @@ import json
 from collections import defaultdict
 
 from fastapi import APIRouter
-from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
-
-from agent.graph import get_graph
 from api.models import ChatRequest, ChatResponse, Citation
 
 router = APIRouter(prefix="/api", tags=["chat"])
@@ -15,6 +12,9 @@ _sessions: dict[str, list] = defaultdict(list)
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
+    from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
+    from agent.graph import get_graph
+
     history = _sessions[request.session_id]
     history.append(HumanMessage(content=request.message))
 

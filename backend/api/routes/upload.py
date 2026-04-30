@@ -1,20 +1,22 @@
 import tempfile
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
-
-from ingestion.pdf_parser import parse_pdf
-from ingestion.chunker import blocks_to_chunk_pairs
-from vectorstore.chroma_store import InsuranceVectorStore
 from api.models import UploadResponse
 
+if TYPE_CHECKING:
+    from vectorstore.chroma_store import InsuranceVectorStore
+
 router = APIRouter(prefix="/api", tags=["ingestion"])
-_store: InsuranceVectorStore | None = None
+_store: "InsuranceVectorStore | None" = None
 
 
-def _get_store() -> InsuranceVectorStore:
+def _get_store() -> "InsuranceVectorStore":
     global _store
     if _store is None:
+        from ingestion.pdf_parser import parse_pdf as _  # noqa: ensure fitz loaded first
+        from vectorstore.chroma_store import InsuranceVectorStore
         _store = InsuranceVectorStore()
     return _store
 
@@ -30,6 +32,8 @@ async def upload_policy(file: UploadFile = File(...)):
         tmp_path = Path(tmp.name)
 
     try:
+        from ingestion.pdf_parser import parse_pdf
+        from ingestion.chunker import blocks_to_chunk_pairs
         blocks = parse_pdf(tmp_path)
         pairs = blocks_to_chunk_pairs(blocks)
         indexed = _get_store().index_chunks(pairs)
