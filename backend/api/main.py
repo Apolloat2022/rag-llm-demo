@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())  # walks up from backend/ until it finds .env
 
@@ -12,10 +13,13 @@ app = FastAPI(
     version="1.0.0",
 )
 
+_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+_origins = [o.strip() for o in _origins_env.split(",")] if _origins_env != "*" else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=_origins,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
