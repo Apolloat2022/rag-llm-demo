@@ -1,6 +1,6 @@
 import type { ChatResponse, UploadResponse } from "./types";
 
-const BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+const BASE = import.meta.env.VITE_API_URL ?? "";
 
 export async function uploadPolicy(file: File): Promise<UploadResponse> {
   const form = new FormData();
