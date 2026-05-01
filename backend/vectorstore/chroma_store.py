@@ -9,19 +9,36 @@ from typing import Any
 
 import chromadb
 from langchain_chroma import Chroma
-from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
+from langchain_core.embeddings import Embeddings
 from langchain_core.documents import Document
 
 from ingestion.chunker import ChunkPair
 
 
-_EMBED_MODEL = "BAAI/bge-small-en-v1.5"
 _CHROMA_DIR = os.getenv("CHROMA_PERSIST_DIR", "./data/chroma")
 _DOCSTORE_PATH = os.getenv("DOCSTORE_PATH", "./data/docstore.json")
 
 
-def _get_embeddings() -> FastEmbedEmbeddings:
-    return FastEmbedEmbeddings(model_name=_EMBED_MODEL)
+class _ChromaBuiltinEmbeddings(Embeddings):
+    """LangChain wrapper around chromadb's bundled ONNX embedding model.
+
+    Reuses onnxruntime that chromadb already loads — zero additional RAM vs
+    sentence-transformers + torch (~400 MB) or fastembed (~150 MB extra).
+    """
+
+    def __init__(self) -> None:
+        from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
+        self._fn = DefaultEmbeddingFunction()
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return [list(v) for v in self._fn(texts)]
+
+    def embed_query(self, text: str) -> list[float]:
+        return list(self._fn([text])[0])
+
+
+def _get_embeddings() -> _ChromaBuiltinEmbeddings:
+    return _ChromaBuiltinEmbeddings()
 
 
 class InsuranceVectorStore:

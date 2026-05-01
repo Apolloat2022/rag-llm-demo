@@ -12,10 +12,10 @@ RUN pip install --no-cache-dir -r dependencies.txt
 
 COPY . .
 
-# Pre-download the fastembed ONNX model at build time (baked into image, no cold-start download)
+# Pre-download chromadb's built-in ONNX model at build time (baked into image)
 RUN python -c "\
-from langchain_community.embeddings.fastembed import FastEmbedEmbeddings; \
-FastEmbedEmbeddings(model_name='BAAI/bge-small-en-v1.5').embed_query('warmup')"
+from chromadb.utils.embedding_functions import DefaultEmbeddingFunction; \
+DefaultEmbeddingFunction()(['warmup'])"
 
 EXPOSE 8000
 
