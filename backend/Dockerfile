@@ -12,11 +12,10 @@ RUN pip install --no-cache-dir -r dependencies.txt
 
 COPY . .
 
-# Pre-download the embedding and re-ranker models at build time
+# Pre-download the fastembed ONNX model at build time (baked into image, no cold-start download)
 RUN python -c "\
-from sentence_transformers import SentenceTransformer, CrossEncoder; \
-SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2'); \
-CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')"
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings; \
+FastEmbedEmbeddings(model_name='BAAI/bge-small-en-v1.5').embed_query('warmup')"
 
 EXPOSE 8000
 

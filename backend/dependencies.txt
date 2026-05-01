@@ -10,7 +10,6 @@ langchain==0.2.6
 langchain-community==0.2.6
 langchain-groq==0.1.9
 langchain-chroma==0.1.2
-langchain-huggingface==0.0.3
 
 # LangGraph agent
 langgraph==0.1.9
@@ -19,9 +18,8 @@ langgraph==0.1.9
 chromadb==0.5.3
 # pinecone-client==4.1.0  # uncomment for production
 
-# Embeddings & Re-ranking
-sentence-transformers==3.0.1
-torch==2.3.1
+# Embeddings — onnxruntime-based, no torch (~80 MB vs ~400 MB for torch)
+fastembed==0.3.6
 
 # Utilities
 pydantic==2.7.3

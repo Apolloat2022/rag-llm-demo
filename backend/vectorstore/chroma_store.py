@@ -9,23 +9,19 @@ from typing import Any
 
 import chromadb
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_core.documents import Document
 
 from ingestion.chunker import ChunkPair
 
 
-_EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+_EMBED_MODEL = "BAAI/bge-small-en-v1.5"
 _CHROMA_DIR = os.getenv("CHROMA_PERSIST_DIR", "./data/chroma")
 _DOCSTORE_PATH = os.getenv("DOCSTORE_PATH", "./data/docstore.json")
 
 
-def _get_embeddings() -> HuggingFaceEmbeddings:
-    return HuggingFaceEmbeddings(
-        model_name=_EMBED_MODEL,
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
-    )
+def _get_embeddings() -> FastEmbedEmbeddings:
+    return FastEmbedEmbeddings(model_name=_EMBED_MODEL)
 
 
 class InsuranceVectorStore:
@@ -79,8 +75,13 @@ class InsuranceVectorStore:
     # --- Retrieval ---
 
     def similarity_search(self, query: str, k: int = 20) -> list[Document]:
-        """Return top-k child chunks by vector similarity."""
-        return self._chroma.similarity_search(query, k=k)
+        """Return top-k child chunks with relevance scores stored in metadata."""
+        results = self._chroma.similarity_search_with_relevance_scores(query, k=k)
+        docs = []
+        for doc, score in results:
+            doc.metadata["similarity_score"] = round(score, 4)
+            docs.append(doc)
+        return docs
 
     def get_parent(self, parent_id: str) -> Document | None:
         """Fetch a parent chunk by its ID from the docstore."""
