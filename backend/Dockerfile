@@ -12,10 +12,18 @@ RUN pip install --no-cache-dir -r dependencies.txt
 
 COPY . .
 
-# Pre-download chromadb's built-in ONNX model at build time (baked into image)
+# Pre-index the mock policy PDF at build time so the demo works immediately
+# without requiring an upload. The vector store is baked into the image.
 RUN python -c "\
-from chromadb.utils.embedding_functions import DefaultEmbeddingFunction; \
-DefaultEmbeddingFunction()(['warmup'])"
+from pathlib import Path; \
+from ingestion.pdf_parser import parse_pdf; \
+from ingestion.chunker import blocks_to_chunk_pairs; \
+from vectorstore.chroma_store import InsuranceVectorStore; \
+blocks = parse_pdf(Path('mock_homeowner_policy.pdf')); \
+pairs = blocks_to_chunk_pairs(blocks); \
+store = InsuranceVectorStore(); \
+count = store.index_chunks(pairs); \
+print(f'Seeded {count} chunks from mock_homeowner_policy.pdf')"
 
 EXPOSE 8000
 
